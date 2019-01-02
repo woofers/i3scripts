@@ -6,10 +6,6 @@
 # for running programs.  It contains icons for a few programs, but more can
 # easily be added by editing the WINDOW_ICONS list below.
 #
-# It also re-numbers workspaces in ascending order with one skipped number
-# between monitors (leaving a gap for a new workspace to be created). By
-# default, i3 workspace numbers are sticky, so they quickly get out of order.
-#
 # Dependencies
 # * xorg-xprop  - install through system package manager
 # * i3ipc       - install with pip
@@ -153,7 +149,7 @@ def rename_workspaces(i3):
 
         new_name = construct_workspace_name(
             NameParts(
-                num=new_num, shortname=name_parts.shortname, icons=new_icons))
+                num=name_parts.num, shortname=name_parts.shortname, icons=new_icons))
         if workspace.name == new_name:
             continue
         i3.command(
