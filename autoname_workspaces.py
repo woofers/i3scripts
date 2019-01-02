@@ -88,7 +88,7 @@ WINDOW_ICONS = {
     'postman': fa.icons['space-shuttle'],
     'rhythmbox': fa.icons['play'],
     'slack': fa.icons['slack'],
-    'spotify': fa.icons['music'],  # could also use the 'spotify' icon
+    'spotify': fa.icons['spotify'],
     'steam': fa.icons['steam'],
     'subl': fa.icons['file-alt'],
     'subl3': fa.icons['file-alt'],
