@@ -25,6 +25,7 @@
 # To:
 #   bindsym $mod+1 workspace number 1
 
+import argparse
 import i3ipc
 import logging
 import signal
@@ -74,25 +75,25 @@ WINDOW_ICONS = {
     'kitty': fa.icons['terminal'],
     'libreoffice': fa.icons['file-alt'],
     'lua5.1': fa.icons['moon'],
-    'nemo': fa.icons['copy'],
-    'nautilus': fa.icons['copy'],
     'mpv': fa.icons['tv'],
-    'mysql-workbench-bin': fa.icons['database'],
     'mupdf': fa.icons['file-pdf'],
+    'mysql-workbench-bin': fa.icons['database'],
+    'nautilus': fa.icons['copy'],
+    'nemo': fa.icons['copy'],
     'openscad': fa.icons['cube'],
     'pavucontrol': fa.icons['volume-up'],
     'postman': fa.icons['space-shuttle'],
     'rhythmbox': fa.icons['play'],
     'slack': fa.icons['slack'],
+    'slic3r.pl': fa.icons['cube'],
     'spotify': fa.icons['spotify'],
     'steam': fa.icons['steam'],
     'subl': fa.icons['file-alt'],
     'subl3': fa.icons['file-alt'],
-    'thunar': fa.icons['copy'],
-    'slic3r.pl': fa.icons['cube'],
     'sublime_text': fa.icons['file-alt'],
-    'totem': fa.icons['play'],
+    'thunar': fa.icons['copy'],
     'thunderbird': fa.icons['envelope'],
+    'totem': fa.icons['play'],
     'urxvt': fa.icons['terminal'],
     'xfce4-terminal': fa.icons['terminal'],
     'xournal': fa.icons['file-alt'],
@@ -102,6 +103,11 @@ WINDOW_ICONS = {
 
 # This icon is used for any application not in the list above
 DEFAULT_ICON = '*'
+
+# Global setting that determines whether workspaces will be automatically
+# re-numbered in ascending order with a "gap" left on each monitor. This is
+# overridden via command-line flag.
+RENUMBER_WORKSPACES = True
 
 
 def ensure_window_icons_lowercase():
@@ -143,8 +149,8 @@ def rename_workspaces(i3):
             n += 1
         prev_output = ws_info.output
 
-        # renumber workspace
-        new_num = n
+        # optionally renumber workspace
+        new_num = n if RENUMBER_WORKSPACES else name_parts.num
         n += 1
 
         new_name = construct_workspace_name(
@@ -173,6 +179,20 @@ def on_exit(i3):
 
 
 if __name__ == '__main__':
+    parser = argparse.ArgumentParser(
+        description=
+        "Rename workspaces dynamically to show icons for running programs.")
+    parser.add_argument(
+        '--norenumber_workspaces',
+        action='store_true',
+        default=False,
+        help=
+        "Disable automatic workspace re-numbering. By default, workspaces are automatically re-numbered in ascending order."
+    )
+    args = parser.parse_args()
+
+    RENUMBER_WORKSPACES = not args.norenumber_workspaces
+
     logging.basicConfig(level=logging.INFO)
 
     ensure_window_icons_lowercase()
