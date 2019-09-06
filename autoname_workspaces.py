@@ -60,6 +60,7 @@ WINDOW_ICONS = {
     'evolution': fa.icons['envelope'],
     'feh': fa.icons['image'],
     'file-roller': fa.icons['compress'],
+    'filezilla': fa.icons['server'],
     'firefox': fa.icons['firefox'],
     'firefox-esr': fa.icons['firefox'],
     'gimp-2.8': fa.icons['image'],
@@ -68,8 +69,11 @@ WINDOW_ICONS = {
     'google-chrome': fa.icons['chrome'],
     'gpick': fa.icons['eye-dropper'],
     'imv': fa.icons['image'],
+    'insomnia': fa.icons['globe'],
     'java': fa.icons['code'],
+    'jetbrains-idea': fa.icons['code'],
     'jetbrains-studio': fa.icons['code'],
+    'keepassxc': fa.icons['key'],
     'keybase': fa.icons['key'],
     'kicad': fa.icons['microchip'],
     'kitty': fa.icons['terminal'],
@@ -84,6 +88,8 @@ WINDOW_ICONS = {
     'pavucontrol': fa.icons['volume-up'],
     'postman': fa.icons['space-shuttle'],
     'rhythmbox': fa.icons['play'],
+    'robo3t': fa.icons['database'],
+    'signal': fa.icons['comment'],
     'slack': fa.icons['slack'],
     'slic3r.pl': fa.icons['cube'],
     'spotify': fa.icons['spotify'],
@@ -99,6 +105,7 @@ WINDOW_ICONS = {
     'xournal': fa.icons['file-alt'],
     'yelp': fa.icons['code'],
     'zenity': fa.icons['window-maximize'],
+    'zoom': fa.icons['comment'],
 }
 
 # This icon is used for any application not in the list above
@@ -111,10 +118,8 @@ RENUMBER_WORKSPACES = True
 
 
 def ensure_window_icons_lowercase():
-    for cls in WINDOW_ICONS:
-        if cls != cls.lower():
-            WINDOW_ICONS[cls.lower()] = WINDOW_ICONS[cls]
-            del WINDOW_ICONS[cls]
+    global WINDOW_ICONS
+    WINDOW_ICONS = {name.lower(): icon for name, icon in WINDOW_ICONS.items()}
 
 
 def icon_for_window(window):

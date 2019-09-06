@@ -1,6 +1,6 @@
 # i3 Scripts
 
-This repo contains a few scripts I've put together for i3.
+This repo contains a few scripts I've put together for [i3](https://github.com/i3/i3).
 Below are the highlights, but see the script files themselves for more detailed info and instructions.
 Note that they function independently, so you can try out one in your workflow without committing to using the rest.
 
@@ -9,7 +9,7 @@ Note that they function independently, so you can try out one in your workflow w
 This script dynamically updates the i3 bar to show icons for running programs next to the workspace names.
 It does this by listening for i3 window events and updating the workspace's "name".
 
-In addition to showing program icons, it also renumbers i3 workspaces in ascending order.
+In addition to showing program icons, it also (optionally) renumbers i3 workspaces in ascending order.
 This makes it easier to navigate.
 
 Here's a [demo](https://gfycat.com/AfraidAmusingCoyote).
